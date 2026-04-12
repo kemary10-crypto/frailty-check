@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おいしく食べてフレイル予防 食事チェック</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+    <div id="start-screen" class="screen">
+      <h1 class="title">おいしく食べてフレイル予防<br>食事チェック</h1>
+      <button onclick="goToAge()">はじめる</button>
+      <button onclick="showHistory()" class="no">今日の記録を見る</button>
+    </div>
+
+    <div id="age-screen" class="screen hidden">
+      <h2>年代を選んでください</h2>
+      <div id="age-buttons"></div>
+    </div>
+
+    <div id="gender-screen" class="screen hidden">
+      <h2>性別を選んでください</h2>
+      <div id="gender-buttons"></div>
+    </div>
+
+    <div id="check-screen" class="screen hidden">
+      <h2 id="food-title"></h2>
+      <p id="food-note"></p>
+      <button class="yes" onclick="answer(true)">食べた</button>
+      <button class="no" onclick="answer(false)">食べていない</button>
+    </div>
+
+    <div id="result-screen" class="screen hidden">
+      <h2>今日の結果</h2>
+      <p id="result-score"></p>
+      <p id="result-message"></p>
+      <button onclick="saveAndRestart()">保存して終了</button>
+    </div>
+
+    <div id="history-screen" class="screen hidden">
+      <h2>記録一覧</h2>
+      <div id="history-content" class="history-list"></div>
+      <button class="no" onclick="show('start-screen')">もどる</button>
+      <button class="clear-btn" onclick="clearHistory()">データをリセット</button>
+    </div>
+
+    <div class="footer-credit">
+      公益社団法人 鳥取県栄養士会
+    </div>
+    </div> <script src="script.js"></script>
+</body>
+</html>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

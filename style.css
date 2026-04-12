@@ -1,0 +1,85 @@
+body {
+  background-color: #FFF4E5;
+  font-family: "Meiryo", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.screen {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.4;
+  margin-bottom: 40px;
+  color: #A65A00;
+}
+
+h2 {
+  color: #A65A00;
+}
+
+button {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  padding: 18px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background-color: #FFA85C; /* 基本のボタン色 */
+  color: white;
+}
+
+button.no {
+  background-color: white;
+  border: 2px solid #FFA85C;
+  color: #FFA85C;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* 履歴画面用 */
+.history-list {
+  text-align: left;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  border-bottom: 1px dashed #ccc;
+  padding: 8px 0;
+  font-size: 16px;
+}
+
+.clear-btn {
+  background: none;
+  color: #999;
+  font-size: 14px;
+  margin-top: 40px;
+  text-decoration: underline;
+}
+
+/* 一番下に追加してください */
+.footer-credit {
+  text-align: center;
+  color: #666666; /* 少し控えめなグレー */
+  font-size: 16px;
+  margin-top: 40px;
+  padding-bottom: 20px;
+  width: 100%;
+}
