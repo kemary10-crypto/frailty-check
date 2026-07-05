@@ -116,10 +116,90 @@ function saveAndRestart() {
     age: selectedAge,
     gender: selectedGender,
     score,
-    details: answers
+    details: answers,
+    time: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
   });
 
   localStorage.setItem("foodCheckData", JSON.stringify(data));
 
   location.reload();
+}
+
+function showHistory() {
+  const data = JSON.parse(localStorage.getItem("foodCheckData") || "{}");
+  const historyContent = document.getElementById("history-content");
+  historyContent.innerHTML = "";
+
+  if (Object.keys(data).length === 0) {
+    historyContent.innerHTML = "<p style='color: #999; padding: 20px;'>記録がまだありません</p>";
+    show("history-screen");
+    return;
+  }
+
+  // 日付の降順でソート（新しい順）
+  const sortedDates = Object.keys(data).sort().reverse();
+
+  sortedDates.forEach(date => {
+    const records = data[date];
+    const dateObj = new Date(date + 'T00:00:00');
+    const dateStr = dateObj.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+
+    records.forEach((record, idx) => {
+      const item = document.createElement("div");
+      item.className = "history-item";
+      
+      const summary = document.createElement("div");
+      summary.className = "history-summary";
+      summary.style.cursor = "pointer";
+      summary.style.userSelect = "none";
+      
+      const scoreColor = record.score >= 7 ? "#4CAF50" : "#FF6B6B";
+      summary.innerHTML = `
+        <strong style="color: ${scoreColor}; font-size: 18px;">${record.score}点</strong>
+        <span style="margin-left: 10px; color: #666;">${dateStr}</span>
+        ${record.time ? `<span style="margin-left: 10px; color: #999; font-size: 14px;">${record.time}</span>` : ''}
+        <span style="margin-left: 10px; color: #999; font-size: 14px;">年代: ${record.age} / 性別: ${record.gender}</span>
+      `;
+
+      const details = document.createElement("div");
+      details.className = "history-details hidden";
+      details.style.marginTop = "10px";
+      details.style.paddingTop = "10px";
+      details.style.borderTop = "1px dashed #ddd";
+      
+      let detailsHtml = "";
+      foodGroups.forEach(fg => {
+        const ate = record.details[fg.group];
+        const icon = ate ? "✓" : "✗";
+        const color = ate ? "#4CAF50" : "#ccc";
+        detailsHtml += `<div style="font-size: 14px; color: #666; margin: 5px 0;">
+          <span style="color: ${color}; font-weight: bold;">${icon}</span> ${fg.group}
+        </div>`;
+      });
+      
+      details.innerHTML = detailsHtml;
+
+      // クリックで詳細展開/閉じる
+      summary.onclick = () => {
+        details.classList.toggle("hidden");
+      };
+
+      item.appendChild(summary);
+      item.appendChild(details);
+      historyContent.appendChild(item);
+    });
+  });
+
+  show("history-screen");
+}
+
+function clearHistory() {
+  if (confirm("本当にすべてのデータを削除してもよろしいですか？")) {
+    localStorage.removeItem("foodCheckData");
+    const historyContent = document.getElementById("history-content");
+    historyContent.innerHTML = "<p style='color: #999; padding: 20px;'>データが削除されました</p>";
+    setTimeout(() => {
+      show("start-screen");
+    }, 1500);
+  }
 }
