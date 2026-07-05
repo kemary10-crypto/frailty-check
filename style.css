@@ -62,8 +62,27 @@ button:hover {
 
 .history-item {
   border-bottom: 1px dashed #ccc;
-  padding: 8px 0;
+  padding: 12px 0;
   font-size: 16px;
+}
+
+.history-summary {
+  padding: 8px;
+  background: #FFFAF5;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.history-summary:hover {
+  background: #FFF0E6;
+}
+
+.history-details {
+  transition: opacity 0.3s ease;
+}
+
+.history-details.hidden {
+  display: none;
 }
 
 .clear-btn {
